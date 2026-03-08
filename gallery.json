@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-03-08T16:35:50.932Z",
+  "updatedAt": "2026-03-08T16:45:51.182Z",
   "layouts": [
     {
       "id": "default-office",
@@ -16,6 +16,40 @@
       "furnitureCount": 56,
       "screenshot": null,
       "layout": "layouts/default-office/layout.json",
+      "createdAt": "2026-03-08"
+    },
+    {
+      "id": "open-plan",
+      "name": "Open Plan Office",
+      "author": "fedevgonzalez",
+      "description": "A spacious open-plan office with 6 workstations, a meeting area, and decorations for larger teams",
+      "tags": [
+        "team",
+        "large",
+        "meeting"
+      ],
+      "cols": 25,
+      "rows": 15,
+      "furnitureCount": 35,
+      "screenshot": null,
+      "layout": "layouts/open-plan/layout.json",
+      "createdAt": "2026-03-08"
+    },
+    {
+      "id": "small-studio",
+      "name": "Small Studio",
+      "author": "fedevgonzalez",
+      "description": "A compact workspace for solo developers or small teams with 1-2 agents",
+      "tags": [
+        "compact",
+        "starter",
+        "solo"
+      ],
+      "cols": 12,
+      "rows": 8,
+      "furnitureCount": 8,
+      "screenshot": null,
+      "layout": "layouts/small-studio/layout.json",
       "createdAt": "2026-03-08"
     }
   ]
