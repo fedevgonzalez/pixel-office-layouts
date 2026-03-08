@@ -1,0 +1,22 @@
+{
+  "version": 1,
+  "updatedAt": "2026-03-08T16:34:50.235Z",
+  "layouts": [
+    {
+      "id": "default-office",
+      "name": "Default Office",
+      "author": "fedevgonzalez",
+      "description": "The default Pixel Office starter layout",
+      "tags": [
+        "starter",
+        "default"
+      ],
+      "cols": 21,
+      "rows": 21,
+      "furnitureCount": 56,
+      "screenshot": null,
+      "layout": "layouts/default-office/layout.json",
+      "createdAt": "2026-03-08"
+    }
+  ]
+}
