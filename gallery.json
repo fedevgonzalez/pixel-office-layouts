@@ -1,7 +1,41 @@
 {
   "version": 1,
-  "updatedAt": "2026-03-08T20:13:52.805Z",
+  "updatedAt": "2026-03-08T20:14:08.855Z",
   "layouts": [
+    {
+      "id": "command-center",
+      "name": "Command Center",
+      "author": "fedevgonzalez",
+      "description": "Mission control layout with 8+ stations surrounding a central ops desk",
+      "tags": [
+        "large",
+        "ops",
+        "monitoring"
+      ],
+      "cols": 22,
+      "rows": 13,
+      "furnitureCount": 40,
+      "screenshot": "layouts/command-center/preview.png",
+      "layout": "layouts/command-center/layout.json",
+      "createdAt": "2026-03-08"
+    },
+    {
+      "id": "cozy-cabin",
+      "name": "Cozy Cabin",
+      "author": "fedevgonzalez",
+      "description": "Warm and intimate workspace with couches, plants, and a reading nook",
+      "tags": [
+        "cozy",
+        "small",
+        "plants"
+      ],
+      "cols": 14,
+      "rows": 10,
+      "furnitureCount": 23,
+      "screenshot": "layouts/cozy-cabin/preview.png",
+      "layout": "layouts/cozy-cabin/layout.json",
+      "createdAt": "2026-03-08"
+    },
     {
       "id": "default-office",
       "name": "Default Office",
@@ -16,6 +50,40 @@
       "furnitureCount": 56,
       "screenshot": "layouts/default-office/preview.png",
       "layout": "layouts/default-office/layout.json",
+      "createdAt": "2026-03-08"
+    },
+    {
+      "id": "l-shaped-office",
+      "name": "L-Shaped Office",
+      "author": "fedevgonzalez",
+      "description": "Spacious L-shaped office with work zones and a cozy lounge corner",
+      "tags": [
+        "large",
+        "l-shape",
+        "lounge"
+      ],
+      "cols": 20,
+      "rows": 14,
+      "furnitureCount": 31,
+      "screenshot": "layouts/l-shaped-office/preview.png",
+      "layout": "layouts/l-shaped-office/layout.json",
+      "createdAt": "2026-03-08"
+    },
+    {
+      "id": "library-study",
+      "name": "Library Study",
+      "author": "fedevgonzalez",
+      "description": "Quiet study room lined with bookshelves — perfect for focused work",
+      "tags": [
+        "quiet",
+        "books",
+        "focus"
+      ],
+      "cols": 16,
+      "rows": 11,
+      "furnitureCount": 31,
+      "screenshot": "layouts/library-study/preview.png",
+      "layout": "layouts/library-study/layout.json",
       "createdAt": "2026-03-08"
     },
     {
@@ -67,74 +135,6 @@
       "furnitureCount": 32,
       "screenshot": "layouts/tech-startup/preview.png",
       "layout": "layouts/tech-startup/layout.json",
-      "createdAt": "2026-03-08"
-    },
-    {
-      "id": "l-shaped-office",
-      "name": "L-Shaped Office",
-      "author": "fedevgonzalez",
-      "description": "Spacious L-shaped office with work zones and a cozy lounge corner",
-      "tags": [
-        "large",
-        "l-shape",
-        "lounge"
-      ],
-      "cols": 20,
-      "rows": 14,
-      "furnitureCount": 31,
-      "screenshot": "layouts/l-shaped-office/preview.png",
-      "layout": "layouts/l-shaped-office/layout.json",
-      "createdAt": "2026-03-08"
-    },
-    {
-      "id": "library-study",
-      "name": "Library Study",
-      "author": "fedevgonzalez",
-      "description": "Quiet study room lined with bookshelves — perfect for focused work",
-      "tags": [
-        "quiet",
-        "books",
-        "focus"
-      ],
-      "cols": 16,
-      "rows": 11,
-      "furnitureCount": 31,
-      "screenshot": "layouts/library-study/preview.png",
-      "layout": "layouts/library-study/layout.json",
-      "createdAt": "2026-03-08"
-    },
-    {
-      "id": "command-center",
-      "name": "Command Center",
-      "author": "fedevgonzalez",
-      "description": "Mission control layout with 8+ stations surrounding a central ops desk",
-      "tags": [
-        "large",
-        "ops",
-        "monitoring"
-      ],
-      "cols": 22,
-      "rows": 13,
-      "furnitureCount": 40,
-      "screenshot": "layouts/command-center/preview.png",
-      "layout": "layouts/command-center/layout.json",
-      "createdAt": "2026-03-08"
-    },
-    {
-      "id": "cozy-cabin",
-      "name": "Cozy Cabin",
-      "author": "fedevgonzalez",
-      "description": "Warm and intimate workspace with couches, plants, and a reading nook",
-      "tags": [
-        "cozy",
-        "small",
-        "plants"
-      ],
-      "cols": 14,
-      "rows": 10,
-      "furnitureCount": 23,
-      "screenshot": "layouts/cozy-cabin/preview.png",
-      "layout": "layouts/cozy-cabin/layout.json",
       "createdAt": "2026-03-08"
     }
   ]
