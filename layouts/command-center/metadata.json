@@ -1,0 +1,11 @@
+{
+  "name": "Command Center",
+  "author": "fedevgonzalez",
+  "description": "Mission control layout with 8+ stations surrounding a central ops desk",
+  "tags": [
+    "large",
+    "ops",
+    "monitoring"
+  ],
+  "createdAt": "2026-03-08"
+}
