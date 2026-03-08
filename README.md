@@ -1,6 +1,6 @@
 # Pixel Office Layouts
 
-Community gallery of layouts for [Pixel Office](https://github.com/pablodelucca/pixel-office).
+Community gallery of layouts for [Pixel Office](https://github.com/fedevgonzalez/pixel-office).
 
 ## How to use a layout
 
