@@ -234,14 +234,12 @@ jobs:
 
           # Start standalone server in background
           cd /tmp/pixel-office
-          export NO_SCAN=1
-          export PORT=3301
-          node standalone-server.js &
+          NO_SCAN=1 node standalone-server.js &
           SERVER_PID=$!
 
           # Wait for server to be ready
           for i in $(seq 1 30); do
-            if curl -s http://localhost:3301 > /dev/null 2>&1; then
+            if curl -s http://localhost:3300 > /dev/null 2>&1; then
               break
             fi
             sleep 1
@@ -255,7 +253,7 @@ jobs:
           (async () => {
             const browser = await chromium.launch({ headless: true });
             const page = await browser.newPage({ viewport: { width: 800, height: 600 } });
-            await page.goto('http://localhost:3301');
+            await page.goto('http://localhost:3300');
             await page.waitForSelector('canvas', { timeout: 15000 });
             await page.waitForTimeout(2000);
 
