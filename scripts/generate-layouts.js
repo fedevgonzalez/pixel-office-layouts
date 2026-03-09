@@ -61,11 +61,9 @@ function buildTileColors(tiles, colorMap) {
   return tiles.map(t => t === WALL || t === VOID ? null : (colorMap[t] || COLORS.oak))
 }
 
-/** Build a layout object */
-function buildLayout(cols, rows, tiles, furniture, tileColors, pets) {
-  const layout = { version: 1, cols, rows, tiles, furniture, tileColors }
-  if (pets && pets.length > 0) layout.pets = pets
-  return layout
+/** Build a layout object — pets are personal, never included in shared layouts */
+function buildLayout(cols, rows, tiles, furniture, tileColors) {
+  return { version: 1, cols, rows, tiles, furniture, tileColors }
 }
 
 // ═══════════════════════════════════════════════════════

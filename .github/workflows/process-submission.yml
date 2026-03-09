@@ -133,7 +133,7 @@ jobs:
       - name: Create branch and push
         if: steps.parse.outputs.layout_id != ''
         run: |
-          BRANCH="layout/${{ steps.parse.outputs.layout_id }}"
+          BRANCH="layout/${{ steps.parse.outputs.layout_id }}-${{ steps.parse.outputs.issue_number }}"
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git checkout -b "$BRANCH"
@@ -157,7 +157,7 @@ jobs:
               owner: context.repo.owner,
               repo: context.repo.repo,
               title: `Add layout: ${layoutName}`,
-              head: `layout/${layoutId}`,
+              head: `layout/${layoutId}-${issueNumber}`,
               base: 'main',
               body: [
                 `Adds community layout **${layoutName}**.`,
@@ -189,6 +189,19 @@ jobs:
 
             core.setOutput('pr_number', String(pr.data.number));
 
+      - name: Handle process failure
+        if: failure()
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const issueNumber = context.payload.issue.number;
+            await github.rest.issues.createComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: issueNumber,
+              body: '❌ Processing failed. A layout with this name may already exist, or there was a server error. Please try a different layout name or contact a maintainer.',
+            });
+
   preview:
     needs: process
     if: needs.process.outputs.layout_id != ''
@@ -196,7 +209,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with:
-          ref: layout/${{ needs.process.outputs.layout_id }}
+          ref: layout/${{ needs.process.outputs.layout_id }}-${{ needs.process.outputs.issue_number }}
 
       - uses: actions/setup-node@v4
         with:
@@ -208,9 +221,9 @@ jobs:
           PIXEL_OFFICE_TOKEN: ${{ secrets.PIXEL_OFFICE_TOKEN }}
         run: |
           if [ -n "$PIXEL_OFFICE_TOKEN" ]; then
-            git clone --depth 1 "https://x-access-token:${PIXEL_OFFICE_TOKEN}@github.com/fedevgonzalez/pixel-office.git" /tmp/pixel-office
+            git clone --depth 1 --branch feat/pets-community-monetization "https://x-access-token:${PIXEL_OFFICE_TOKEN}@github.com/fedevgonzalez/pixel-office.git" /tmp/pixel-office
           else
-            git clone --depth 1 https://github.com/fedevgonzalez/pixel-office.git /tmp/pixel-office
+            git clone --depth 1 --branch feat/pets-community-monetization https://github.com/fedevgonzalez/pixel-office.git /tmp/pixel-office
           fi
 
       - name: Build pixel-office
@@ -252,36 +265,39 @@ jobs:
 
           (async () => {
             const browser = await chromium.launch({ headless: true });
-            const page = await browser.newPage({ viewport: { width: 800, height: 600 } });
-            await page.goto('http://localhost:3300');
-            await page.waitForSelector('canvas', { timeout: 15000 });
-            await page.waitForTimeout(2000);
+            const page = await browser.newPage({ viewport: { width: 1200, height: 900 } });
+            await page.goto('http://localhost:3300/?screenshot');
+            await page.waitForSelector('[data-screenshot-ready]', { timeout: 15000 });
+            await page.waitForTimeout(1000);
 
-            // Connect WebSocket to import layout
+            // Import layout via WebSocket — track success to detect silent failures
             const layout = JSON.parse(fs.readFileSync('${LAYOUT_FILE}', 'utf-8'));
-            await page.evaluate((layoutData) => {
+            const imported = await page.evaluate((layoutData) => {
               return new Promise((resolve) => {
+                let loaded = false;
                 const proto = location.protocol === 'https:' ? 'wss:' : 'ws:';
                 const ws = new WebSocket(proto + '//' + location.host);
                 ws.onopen = () => {
                   ws.send(JSON.stringify({ type: 'importGalleryLayout', layout: layoutData }));
-                  const handler = (e) => {
+                  ws.addEventListener('message', (e) => {
                     try {
                       const msg = JSON.parse(e.data);
-                      if (msg.type === 'layoutLoaded') {
-                        ws.removeEventListener('message', handler);
-                        resolve();
-                      }
+                      if (msg.type === 'layoutLoaded') { loaded = true; resolve(true); }
                     } catch {}
-                  };
-                  ws.addEventListener('message', handler);
-                  setTimeout(resolve, 5000);
+                  });
+                  setTimeout(() => resolve(loaded), 5000);
                 };
-                setTimeout(resolve, 8000);
+                setTimeout(() => resolve(loaded), 8000);
               });
             }, layout);
 
-            await page.waitForTimeout(1500);
+            if (!imported) {
+              console.error('Layout import timed out — screenshot may show wrong layout');
+              process.exit(1);
+            }
+
+            // Wait for render to settle (sprite cache, floor/wall tiles)
+            await page.waitForTimeout(2500);
 
             const canvas = page.locator('canvas').first();
             await canvas.screenshot({ path: '${SCREENSHOT_FILE}' });
@@ -309,7 +325,7 @@ jobs:
             const layoutName = '${{ needs.process.outputs.layout_name }}';
             const issueNumber = Number('${{ needs.process.outputs.issue_number }}');
             const prNumber = Number('${{ needs.process.outputs.pr_number }}');
-            const branch = `layout/${layoutId}`;
+            const branch = `layout/${layoutId}-${issueNumber}`;
 
             // Use blob URL with ?raw=true — works for anyone with repo access
             // (raw.githubusercontent.com doesn't work for private repos)
@@ -356,10 +372,9 @@ jobs:
               repo: context.repo.repo,
               issue_number: issueNumber,
               body: [
-                `✅ Layout received! PR created: #${prNumber}`,
+                `⚠️ Preview screenshot could not be generated automatically.`,
                 '',
-                '⚠️ Preview screenshot could not be generated automatically. The layout is still valid.',
-                '',
+                `Your layout was accepted and PR #${prNumber} is open.`,
                 'A maintainer will review and merge it. Once merged, your layout will appear in the community gallery.',
               ].join('\n'),
             });
