@@ -1,0 +1,153 @@
+name: Process Layout Submission
+
+on:
+  issues:
+    types: [labeled]
+
+permissions:
+  contents: write
+  issues: write
+  pull-requests: write
+
+jobs:
+  process:
+    if: contains(github.event.issue.labels.*.name, 'layout-submission')
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Parse issue and create layout
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const issue = context.payload.issue;
+            const body = issue.body || '';
+
+            // Parse metadata from issue body
+            const nameMatch = body.match(/\*\*Name:\*\*\s*(.+)/);
+            const authorMatch = body.match(/\*\*Author:\*\*\s*(.+)/);
+            const descMatch = body.match(/\*\*Description:\*\*\s*(.+)/);
+            const tagsMatch = body.match(/\*\*Tags:\*\*\s*(.+)/);
+            const jsonMatch = body.match(/```json\s*([\s\S]*?)```/);
+
+            if (!nameMatch || !jsonMatch) {
+              await github.rest.issues.createComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: issue.number,
+                body: '❌ Could not parse layout submission. Make sure the issue contains **Name:** and a ```json``` code block with the layout data.'
+              });
+              return;
+            }
+
+            const layoutName = nameMatch[1].trim();
+            const author = authorMatch ? authorMatch[1].trim() : 'anonymous';
+            const description = descMatch ? descMatch[1].trim() : '';
+            const tags = tagsMatch ? tagsMatch[1].split(',').map(t => t.trim().toLowerCase()).filter(Boolean) : [];
+
+            // Validate JSON
+            let layout;
+            try {
+              layout = JSON.parse(jsonMatch[1].trim());
+            } catch (e) {
+              await github.rest.issues.createComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: issue.number,
+                body: '❌ Invalid JSON in layout data. Please check the format and try again.'
+              });
+              return;
+            }
+
+            if (layout.version !== 1 || !Array.isArray(layout.tiles)) {
+              await github.rest.issues.createComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: issue.number,
+                body: '❌ Layout must have `version: 1` and a `tiles` array.'
+              });
+              return;
+            }
+
+            // Generate kebab-case ID
+            const id = layoutName.toLowerCase().replace(/[^a-z0-9\s-]/g, '').replace(/\s+/g, '-').replace(/-+/g, '-').replace(/^-|-$/g, '');
+            if (!id) {
+              await github.rest.issues.createComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: issue.number,
+                body: '❌ Could not generate a valid ID from the layout name.'
+              });
+              return;
+            }
+
+            // Check if layout already exists
+            const fs = require('fs');
+            const path = require('path');
+            const layoutDir = path.join('layouts', id);
+            if (fs.existsSync(layoutDir)) {
+              await github.rest.issues.createComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: issue.number,
+                body: `❌ A layout with the ID \`${id}\` already exists. Please choose a different name.`
+              });
+              return;
+            }
+
+            // Strip pets if present
+            delete layout.pets;
+
+            // Create layout files
+            fs.mkdirSync(layoutDir, { recursive: true });
+            fs.writeFileSync(
+              path.join(layoutDir, 'layout.json'),
+              JSON.stringify(layout, null, 2) + '\n'
+            );
+            fs.writeFileSync(
+              path.join(layoutDir, 'metadata.json'),
+              JSON.stringify({
+                name: layoutName,
+                author,
+                description,
+                tags,
+                createdAt: new Date().toISOString().slice(0, 10),
+              }, null, 2) + '\n'
+            );
+
+            // Store data for next steps
+            core.exportVariable('LAYOUT_ID', id);
+            core.exportVariable('LAYOUT_NAME', layoutName);
+            core.exportVariable('ISSUE_NUMBER', issue.number);
+
+      - name: Create PR
+        if: env.LAYOUT_ID != ''
+        run: |
+          BRANCH="layout/${{ env.LAYOUT_ID }}"
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git checkout -b "$BRANCH"
+          git add "layouts/${{ env.LAYOUT_ID }}"
+          git commit -m "feat: add layout '${{ env.LAYOUT_NAME }}' (#${{ env.ISSUE_NUMBER }})"
+          git push origin "$BRANCH"
+
+      - name: Open PR and comment on issue
+        if: env.LAYOUT_ID != ''
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const pr = await github.rest.pulls.create({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              title: `Add layout: ${process.env.LAYOUT_NAME}`,
+              head: `layout/${process.env.LAYOUT_ID}`,
+              base: 'main',
+              body: `Adds community layout **${process.env.LAYOUT_NAME}**.\n\nCloses #${process.env.ISSUE_NUMBER}\n\n_Auto-generated from issue submission._`,
+            });
+
+            await github.rest.issues.createComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: Number(process.env.ISSUE_NUMBER),
+              body: `✅ Layout received! PR created: #${pr.data.number}\n\nA maintainer will review and merge it. Once merged, your layout will appear in the community gallery.`,
+            });
