@@ -221,9 +221,9 @@ jobs:
           PIXEL_OFFICE_TOKEN: ${{ secrets.PIXEL_OFFICE_TOKEN }}
         run: |
           if [ -n "$PIXEL_OFFICE_TOKEN" ]; then
-            git clone --depth 1 --branch master "https://x-access-token:${PIXEL_OFFICE_TOKEN}@github.com/fedevgonzalez/pixel-office.git" /tmp/pixel-office
+            git clone --depth 1 "https://x-access-token:${PIXEL_OFFICE_TOKEN}@github.com/fedevgonzalez/pixel-office.git" /tmp/pixel-office
           else
-            git clone --depth 1 --branch master https://github.com/fedevgonzalez/pixel-office.git /tmp/pixel-office
+            git clone --depth 1 https://github.com/fedevgonzalez/pixel-office.git /tmp/pixel-office
           fi
 
       - name: Build pixel-office
