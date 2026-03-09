@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-03-08T20:14:08.855Z",
+  "updatedAt": "2026-03-09T12:45:33.199Z",
   "layouts": [
     {
       "id": "command-center",
@@ -51,6 +51,40 @@
       "screenshot": "layouts/default-office/preview.png",
       "layout": "layouts/default-office/layout.json",
       "createdAt": "2026-03-08"
+    },
+    {
+      "id": "executive-suite",
+      "name": "Executive Suite",
+      "author": "fedevgonzalez",
+      "description": "Private executive suite with a commanding desk, meeting area, and tasteful decor",
+      "tags": [
+        "executive",
+        "premium",
+        "solo"
+      ],
+      "cols": 15,
+      "rows": 10,
+      "furnitureCount": 23,
+      "screenshot": "layouts/executive-suite/preview.png",
+      "layout": "layouts/executive-suite/layout.json",
+      "createdAt": "2026-03-09"
+    },
+    {
+      "id": "gaming-den",
+      "name": "Gaming Den",
+      "author": "fedevgonzalez",
+      "description": "High-energy gaming setup with multiple monitor stations and vibrant colors",
+      "tags": [
+        "fun",
+        "gaming",
+        "creative"
+      ],
+      "cols": 14,
+      "rows": 11,
+      "furnitureCount": 26,
+      "screenshot": "layouts/gaming-den/preview.png",
+      "layout": "layouts/gaming-den/layout.json",
+      "createdAt": "2026-03-09"
     },
     {
       "id": "l-shaped-office",
