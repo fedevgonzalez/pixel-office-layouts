@@ -223,6 +223,7 @@ jobs:
       - name: Install Playwright
         run: |
           cd /tmp/pixel-office
+          npm install playwright
           npx playwright install chromium --with-deps
 
       - name: Take screenshot
@@ -233,7 +234,9 @@ jobs:
 
           # Start standalone server in background
           cd /tmp/pixel-office
-          NO_SCAN=1 PORT=3301 node standalone-server.js &
+          export NO_SCAN=1
+          export PORT=3301
+          node standalone-server.js &
           SERVER_PID=$!
 
           # Wait for server to be ready
