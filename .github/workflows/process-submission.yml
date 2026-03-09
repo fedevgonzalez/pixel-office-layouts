@@ -13,10 +13,18 @@ jobs:
   process:
     if: contains(github.event.issue.labels.*.name, 'layout-submission')
     runs-on: ubuntu-latest
+    outputs:
+      layout_id: ${{ steps.parse.outputs.layout_id }}
+      layout_name: ${{ steps.parse.outputs.layout_name }}
+      layout_author: ${{ steps.parse.outputs.layout_author }}
+      layout_tags: ${{ steps.parse.outputs.layout_tags }}
+      issue_number: ${{ steps.parse.outputs.issue_number }}
+      pr_number: ${{ steps.create_pr.outputs.pr_number }}
     steps:
       - uses: actions/checkout@v4
 
       - name: Parse issue and create layout
+        id: parse
         uses: actions/github-script@v7
         with:
           script: |
@@ -115,39 +123,240 @@ jobs:
               }, null, 2) + '\n'
             );
 
-            // Store data for next steps
-            core.exportVariable('LAYOUT_ID', id);
-            core.exportVariable('LAYOUT_NAME', layoutName);
-            core.exportVariable('ISSUE_NUMBER', issue.number);
+            // Set outputs for downstream jobs
+            core.setOutput('layout_id', id);
+            core.setOutput('layout_name', layoutName);
+            core.setOutput('layout_author', author);
+            core.setOutput('layout_tags', tags.join(', '));
+            core.setOutput('issue_number', String(issue.number));
 
-      - name: Create PR
-        if: env.LAYOUT_ID != ''
+      - name: Create branch and push
+        if: steps.parse.outputs.layout_id != ''
         run: |
-          BRANCH="layout/${{ env.LAYOUT_ID }}"
+          BRANCH="layout/${{ steps.parse.outputs.layout_id }}"
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git checkout -b "$BRANCH"
-          git add "layouts/${{ env.LAYOUT_ID }}"
-          git commit -m "feat: add layout '${{ env.LAYOUT_NAME }}' (#${{ env.ISSUE_NUMBER }})"
+          git add "layouts/${{ steps.parse.outputs.layout_id }}"
+          git commit -m "feat: add layout '${{ steps.parse.outputs.layout_name }}' (#${{ steps.parse.outputs.issue_number }})"
           git push origin "$BRANCH"
 
       - name: Open PR and comment on issue
-        if: env.LAYOUT_ID != ''
+        id: create_pr
+        if: steps.parse.outputs.layout_id != ''
         uses: actions/github-script@v7
         with:
           script: |
+            const layoutId = '${{ steps.parse.outputs.layout_id }}';
+            const layoutName = '${{ steps.parse.outputs.layout_name }}';
+            const layoutAuthor = '${{ steps.parse.outputs.layout_author }}';
+            const layoutTags = '${{ steps.parse.outputs.layout_tags }}';
+            const issueNumber = Number('${{ steps.parse.outputs.issue_number }}');
+
             const pr = await github.rest.pulls.create({
               owner: context.repo.owner,
               repo: context.repo.repo,
-              title: `Add layout: ${process.env.LAYOUT_NAME}`,
-              head: `layout/${process.env.LAYOUT_ID}`,
+              title: `Add layout: ${layoutName}`,
+              head: `layout/${layoutId}`,
               base: 'main',
-              body: `Adds community layout **${process.env.LAYOUT_NAME}**.\n\nCloses #${process.env.ISSUE_NUMBER}\n\n_Auto-generated from issue submission._`,
+              body: [
+                `Adds community layout **${layoutName}**.`,
+                '',
+                `Closes #${issueNumber}`,
+                '',
+                '_Auto-generated from issue submission._',
+                '',
+                '---',
+                '🖼️ _Preview screenshot will be added shortly..._',
+              ].join('\n'),
             });
 
+            // Comment on issue with metadata so user can verify parsing
             await github.rest.issues.createComment({
               owner: context.repo.owner,
               repo: context.repo.repo,
-              issue_number: Number(process.env.ISSUE_NUMBER),
-              body: `✅ Layout received! PR created: #${pr.data.number}\n\nA maintainer will review and merge it. Once merged, your layout will appear in the community gallery.`,
+              issue_number: issueNumber,
+              body: [
+                `✅ Layout received! PR created: #${pr.data.number}`,
+                '',
+                `**Layout:** ${layoutName}`,
+                `**Author:** ${layoutAuthor}`,
+                layoutTags ? `**Tags:** ${layoutTags}` : '',
+                '',
+                '🖼️ _Generating preview screenshot... this takes about 2-3 minutes._',
+              ].filter(Boolean).join('\n'),
+            });
+
+            core.setOutput('pr_number', String(pr.data.number));
+
+  preview:
+    needs: process
+    if: needs.process.outputs.layout_id != ''
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: layout/${{ needs.process.outputs.layout_id }}
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      # Clone and build pixel-office standalone server
+      - name: Clone pixel-office
+        env:
+          PIXEL_OFFICE_TOKEN: ${{ secrets.PIXEL_OFFICE_TOKEN }}
+        run: |
+          if [ -n "$PIXEL_OFFICE_TOKEN" ]; then
+            git clone --depth 1 "https://x-access-token:${PIXEL_OFFICE_TOKEN}@github.com/fedevgonzalez/pixel-office.git" /tmp/pixel-office
+          else
+            git clone --depth 1 https://github.com/fedevgonzalez/pixel-office.git /tmp/pixel-office
+          fi
+
+      - name: Build pixel-office
+        run: |
+          cd /tmp/pixel-office
+          npm ci
+          cd webview-ui && npm ci && cd ..
+          npm run build
+
+      - name: Install Playwright
+        run: |
+          cd /tmp/pixel-office
+          npx playwright install chromium --with-deps
+
+      - name: Take screenshot
+        run: |
+          LAYOUT_ID="${{ needs.process.outputs.layout_id }}"
+          LAYOUT_FILE="$(pwd)/layouts/${LAYOUT_ID}/layout.json"
+          SCREENSHOT_FILE="$(pwd)/layouts/${LAYOUT_ID}/preview.png"
+
+          # Start standalone server in background
+          cd /tmp/pixel-office
+          NO_SCAN=1 PORT=3301 node standalone-server.js &
+          SERVER_PID=$!
+
+          # Wait for server to be ready
+          for i in $(seq 1 30); do
+            if curl -s http://localhost:3301 > /dev/null 2>&1; then
+              break
+            fi
+            sleep 1
+          done
+
+          # Run screenshot script
+          node -e "
+          const { chromium } = require('playwright');
+          const fs = require('fs');
+
+          (async () => {
+            const browser = await chromium.launch({ headless: true });
+            const page = await browser.newPage({ viewport: { width: 800, height: 600 } });
+            await page.goto('http://localhost:3301');
+            await page.waitForSelector('canvas', { timeout: 15000 });
+            await page.waitForTimeout(2000);
+
+            // Connect WebSocket to import layout
+            const layout = JSON.parse(fs.readFileSync('${LAYOUT_FILE}', 'utf-8'));
+            await page.evaluate((layoutData) => {
+              return new Promise((resolve) => {
+                const proto = location.protocol === 'https:' ? 'wss:' : 'ws:';
+                const ws = new WebSocket(proto + '//' + location.host);
+                ws.onopen = () => {
+                  ws.send(JSON.stringify({ type: 'importGalleryLayout', layout: layoutData }));
+                  const handler = (e) => {
+                    try {
+                      const msg = JSON.parse(e.data);
+                      if (msg.type === 'layoutLoaded') {
+                        ws.removeEventListener('message', handler);
+                        resolve();
+                      }
+                    } catch {}
+                  };
+                  ws.addEventListener('message', handler);
+                  setTimeout(resolve, 5000);
+                };
+                setTimeout(resolve, 8000);
+              });
+            }, layout);
+
+            await page.waitForTimeout(1500);
+
+            const canvas = page.locator('canvas').first();
+            await canvas.screenshot({ path: '${SCREENSHOT_FILE}' });
+            console.log('Screenshot saved');
+            await browser.close();
+          })();
+          "
+
+          kill $SERVER_PID 2>/dev/null || true
+
+      - name: Commit preview to branch
+        run: |
+          LAYOUT_ID="${{ needs.process.outputs.layout_id }}"
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add "layouts/${LAYOUT_ID}/preview.png"
+          git diff --cached --quiet || git commit -m "chore: add preview screenshot for ${LAYOUT_ID}"
+          git push
+
+      - name: Post preview on issue and update PR description
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const layoutId = '${{ needs.process.outputs.layout_id }}';
+            const layoutName = '${{ needs.process.outputs.layout_name }}';
+            const issueNumber = Number('${{ needs.process.outputs.issue_number }}');
+            const prNumber = Number('${{ needs.process.outputs.pr_number }}');
+            const branch = `layout/${layoutId}`;
+
+            const previewUrl = `https://raw.githubusercontent.com/${context.repo.owner}/${context.repo.repo}/${branch}/layouts/${layoutId}/preview.png`;
+
+            // Post new comment on issue with preview (new comment = notification)
+            await github.rest.issues.createComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: issueNumber,
+              body: `### 🖼️ Preview\n\n![${layoutName}](${previewUrl})\n\nA maintainer will review and merge it. Once merged, your layout will appear in the community gallery.`,
+            });
+
+            // Update PR description to include preview image (visible without scrolling)
+            const { data: pr } = await github.rest.pulls.get({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              pull_number: prNumber,
+            });
+
+            const updatedBody = pr.body.replace(
+              /---\n🖼️ _Preview screenshot will be added shortly\.\.\._/,
+              `---\n### 🖼️ Preview\n\n![${layoutName}](${previewUrl})`
+            );
+
+            await github.rest.pulls.update({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              pull_number: prNumber,
+              body: updatedBody,
+            });
+
+      - name: Post failure notice
+        if: failure()
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const issueNumber = Number('${{ needs.process.outputs.issue_number }}');
+            const prNumber = Number('${{ needs.process.outputs.pr_number }}');
+
+            // Always post visible failure — never fail silently
+            await github.rest.issues.createComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: issueNumber,
+              body: [
+                `✅ Layout received! PR created: #${prNumber}`,
+                '',
+                '⚠️ Preview screenshot could not be generated automatically. The layout is still valid.',
+                '',
+                'A maintainer will review and merge it. Once merged, your layout will appear in the community gallery.',
+              ].join('\n'),
             });
