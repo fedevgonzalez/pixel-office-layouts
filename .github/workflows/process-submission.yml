@@ -311,7 +311,9 @@ jobs:
             const prNumber = Number('${{ needs.process.outputs.pr_number }}');
             const branch = `layout/${layoutId}`;
 
-            const previewUrl = `https://raw.githubusercontent.com/${context.repo.owner}/${context.repo.repo}/${branch}/layouts/${layoutId}/preview.png`;
+            // Use blob URL with ?raw=true — works for anyone with repo access
+            // (raw.githubusercontent.com doesn't work for private repos)
+            const previewUrl = `https://github.com/${context.repo.owner}/${context.repo.repo}/blob/${branch}/layouts/${layoutId}/preview.png?raw=true`;
 
             // Post new comment on issue with preview (new comment = notification)
             await github.rest.issues.createComment({
