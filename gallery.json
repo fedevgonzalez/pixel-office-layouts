@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-03-10T19:45:28.781Z",
+  "updatedAt": "2026-03-10T20:03:27.279Z",
   "layouts": [
     {
       "id": "command-center",
@@ -167,7 +167,7 @@
       ],
       "cols": 18,
       "rows": 12,
-      "furnitureCount": 47,
+      "furnitureCount": 45,
       "screenshot": "layouts/tech-startup/preview.png",
       "layout": "layouts/tech-startup/layout.json",
       "createdAt": "2026-03-08"

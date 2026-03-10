@@ -758,8 +758,7 @@ function makeTechStartup() {
     furn('plant', 1, 10),
     furn('plant', 5, 10),
     // Door eng→focus
-    furn('door', 6, 4),
-    furn('door', 6, 8),
+    furn('door', 6, 5),
     // Focus zone
     ...deskCluster(7, 1, { lamp: true }),
     ...deskCluster(7, 5, { pc: true }),
@@ -771,8 +770,7 @@ function makeTechStartup() {
     furn('plant', 7, 10),
     furn('plant', 10, 10),
     // Door focus→break
-    furn('door', 11, 4),
-    furn('door', 11, 8),
+    furn('door', 11, 5),
     // Break kitchen
     furn('coffee_machine', 16, 1),
     furn('coffee_machine', 16, 3),
