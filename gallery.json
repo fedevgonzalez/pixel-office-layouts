@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-03-10T17:20:18.565Z",
+  "updatedAt": "2026-03-10T17:48:45.745Z",
   "layouts": [
     {
       "id": "command-center",
@@ -64,7 +64,7 @@
       ],
       "cols": 15,
       "rows": 10,
-      "furnitureCount": 23,
+      "furnitureCount": 25,
       "screenshot": "layouts/executive-suite/preview.png",
       "layout": "layouts/executive-suite/layout.json",
       "createdAt": "2026-03-09"
@@ -115,7 +115,7 @@
       ],
       "cols": 16,
       "rows": 11,
-      "furnitureCount": 31,
+      "furnitureCount": 32,
       "screenshot": "layouts/library-study/preview.png",
       "layout": "layouts/library-study/layout.json",
       "createdAt": "2026-03-08"
@@ -132,7 +132,7 @@
       ],
       "cols": 25,
       "rows": 15,
-      "furnitureCount": 37,
+      "furnitureCount": 40,
       "screenshot": "layouts/open-plan/preview.png",
       "layout": "layouts/open-plan/layout.json",
       "createdAt": "2026-03-08"
@@ -148,8 +148,8 @@
         "solo"
       ],
       "cols": 12,
-      "rows": 8,
-      "furnitureCount": 9,
+      "rows": 10,
+      "furnitureCount": 11,
       "screenshot": "layouts/small-studio/preview.png",
       "layout": "layouts/small-studio/layout.json",
       "createdAt": "2026-03-08"
