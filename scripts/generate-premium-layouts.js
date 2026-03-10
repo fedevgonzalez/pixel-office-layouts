@@ -29,6 +29,12 @@ function makeColors(tiles, colorMap) {
   })
 }
 
+/** Build zones array — mark work/focus floor types as 'focus' (no-wander), rest as null */
+function makeZones(tiles, workFloorTypes) {
+  const workSet = new Set(workFloorTypes)
+  return tiles.map(t => workSet.has(t) ? 'focus' : null)
+}
+
 function furn(type, col, row, color) {
   const f = { uid: uid(), type, col, row }
   if (color) f.color = color
@@ -123,7 +129,7 @@ function makeDefaultOffice() {
   }
 
   return {
-    layout: { version: 1, cols, rows, tiles, furniture, tileColors: makeColors(tiles, colorMap) },
+    layout: { version: 1, cols, rows, tiles, furniture, tileColors: makeColors(tiles, colorMap), zones: makeZones(tiles, [F2, F4]) },
     metadata: {
       name: 'Default Office',
       author: 'fedevgonzalez',
@@ -201,7 +207,7 @@ function makeCommandCenter() {
   }
 
   return {
-    layout: { version: 1, cols, rows, tiles, furniture, tileColors: makeColors(tiles, colorMap) },
+    layout: { version: 1, cols, rows, tiles, furniture, tileColors: makeColors(tiles, colorMap), zones: makeZones(tiles, [F5, F6]) },
     metadata: {
       name: 'Command Center',
       author: 'fedevgonzalez',
@@ -256,7 +262,7 @@ function makeCozyCabin() {
   }
 
   return {
-    layout: { version: 1, cols, rows, tiles, furniture, tileColors: makeColors(tiles, colorMap) },
+    layout: { version: 1, cols, rows, tiles, furniture, tileColors: makeColors(tiles, colorMap), zones: makeZones(tiles, [F3]) },
     metadata: {
       name: 'Cozy Cabin',
       author: 'fedevgonzalez',
@@ -330,7 +336,7 @@ function makeExecutiveSuite() {
   }
 
   return {
-    layout: { version: 1, cols, rows, tiles, furniture, tileColors: makeColors(tiles, colorMap) },
+    layout: { version: 1, cols, rows, tiles, furniture, tileColors: makeColors(tiles, colorMap), zones: makeZones(tiles, [F4, F6]) },
     metadata: {
       name: 'Executive Suite',
       author: 'fedevgonzalez',
@@ -392,7 +398,7 @@ function makeGamingDen() {
   }
 
   return {
-    layout: { version: 1, cols, rows, tiles, furniture, tileColors: makeColors(tiles, colorMap) },
+    layout: { version: 1, cols, rows, tiles, furniture, tileColors: makeColors(tiles, colorMap), zones: makeZones(tiles, [F5]) },
     metadata: {
       name: 'Gaming Den',
       author: 'fedevgonzalez',
@@ -471,7 +477,7 @@ function makeLShapedOffice() {
   }
 
   return {
-    layout: { version: 1, cols, rows, tiles, furniture, tileColors: makeColors(tiles, colorMap) },
+    layout: { version: 1, cols, rows, tiles, furniture, tileColors: makeColors(tiles, colorMap), zones: makeZones(tiles, [F2, F6]) },
     metadata: {
       name: 'L-Shaped Office',
       author: 'fedevgonzalez',
@@ -552,7 +558,7 @@ function makeLibraryStudy() {
   }
 
   return {
-    layout: { version: 1, cols, rows, tiles, furniture, tileColors: makeColors(tiles, colorMap) },
+    layout: { version: 1, cols, rows, tiles, furniture, tileColors: makeColors(tiles, colorMap), zones: makeZones(tiles, [F3, F7]) },
     metadata: {
       name: 'Library Study',
       author: 'fedevgonzalez',
@@ -649,7 +655,7 @@ function makeOpenPlan() {
   }
 
   return {
-    layout: { version: 1, cols, rows, tiles, furniture, tileColors: makeColors(tiles, colorMap) },
+    layout: { version: 1, cols, rows, tiles, furniture, tileColors: makeColors(tiles, colorMap), zones: makeZones(tiles, [F5, F2, F6]) },
     metadata: {
       name: 'Open Plan',
       author: 'fedevgonzalez',
@@ -706,7 +712,7 @@ function makeSmallStudio() {
   }
 
   return {
-    layout: { version: 1, cols, rows, tiles, furniture, tileColors: makeColors(tiles, colorMap) },
+    layout: { version: 1, cols, rows, tiles, furniture, tileColors: makeColors(tiles, colorMap), zones: makeZones(tiles, [F3]) },
     metadata: {
       name: 'Small Studio',
       author: 'fedevgonzalez',
@@ -789,7 +795,7 @@ function makeTechStartup() {
   }
 
   return {
-    layout: { version: 1, cols, rows, tiles, furniture, tileColors: makeColors(tiles, colorMap) },
+    layout: { version: 1, cols, rows, tiles, furniture, tileColors: makeColors(tiles, colorMap), zones: makeZones(tiles, [F2, F5]) },
     metadata: {
       name: 'Tech Startup',
       author: 'fedevgonzalez',
