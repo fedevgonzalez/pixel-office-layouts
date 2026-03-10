@@ -1934,5 +1934,8 @@
         "nose": "#302010"
       }
     }
-  ]
+  ],
+  "background": {
+    "theme": "suburban"
+  }
 }

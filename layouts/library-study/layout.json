@@ -1191,5 +1191,8 @@
         "patternColor": "#e8e0d8"
       }
     }
-  ]
+  ],
+  "background": {
+    "theme": "suburban"
+  }
 }

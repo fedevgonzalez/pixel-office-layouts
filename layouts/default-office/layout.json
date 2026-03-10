@@ -2797,6 +2797,21 @@
       "type": "ASSET_123",
       "col": 2,
       "row": 19
+    },
+    {
+      "uid": "break-coffee-1",
+      "type": "coffee_machine",
+      "col": 17,
+      "row": 18
+    },
+    {
+      "uid": "break-couch-1",
+      "type": "break_couch",
+      "col": 14,
+      "row": 18
     }
-  ]
+  ],
+  "background": {
+    "theme": "suburban"
+  }
 }

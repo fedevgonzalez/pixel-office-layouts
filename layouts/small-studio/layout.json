@@ -148,6 +148,12 @@
       "type": "pc",
       "row": 2,
       "col": 4
+    },
+    {
+      "uid": "break-coffee-1",
+      "type": "coffee_machine",
+      "col": 9,
+      "row": 5
     }
   ],
   "tileColors": [
@@ -597,5 +603,8 @@
       "c": -20
     },
     null
-  ]
+  ],
+  "background": {
+    "theme": "suburban"
+  }
 }

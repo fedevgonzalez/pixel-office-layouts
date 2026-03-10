@@ -589,6 +589,18 @@
       "type": "pc",
       "row": 6,
       "col": 15
+    },
+    {
+      "uid": "break-coffee-1",
+      "type": "coffee_machine",
+      "col": 5,
+      "row": 13
+    },
+    {
+      "uid": "break-couch-1",
+      "type": "break_couch",
+      "col": 2,
+      "row": 13
     }
   ],
   "tileColors": [
@@ -2577,5 +2589,8 @@
       "c": -30
     },
     null
-  ]
+  ],
+  "background": {
+    "theme": "suburban"
+  }
 }
