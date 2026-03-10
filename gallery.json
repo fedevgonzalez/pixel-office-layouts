@@ -1,176 +1,122 @@
-{
-  "version": 1,
-  "updatedAt": "2026-03-10T20:03:44.952Z",
-  "layouts": [
-    {
-      "id": "command-center",
-      "name": "Command Center",
-      "author": "fedevgonzalez",
-      "description": "Mission control layout with monitoring stations, tactical briefing pod, and break alcove",
-      "tags": [
-        "large",
-        "ops",
-        "monitoring"
-      ],
-      "cols": 20,
-      "rows": 13,
-      "furnitureCount": 44,
-      "screenshot": "layouts/command-center/preview.png",
-      "layout": "layouts/command-center/layout.json",
-      "createdAt": "2026-03-08"
-    },
-    {
-      "id": "cozy-cabin",
-      "name": "Cozy Cabin",
-      "author": "fedevgonzalez",
-      "description": "Warm and intimate workspace with rustic pine floors, bookshelves, and a cozy break nook",
-      "tags": [
-        "cozy",
-        "small",
-        "plants"
-      ],
-      "cols": 14,
-      "rows": 10,
-      "furnitureCount": 20,
-      "screenshot": "layouts/cozy-cabin/preview.png",
-      "layout": "layouts/cozy-cabin/layout.json",
-      "createdAt": "2026-03-08"
-    },
-    {
-      "id": "default-office",
-      "name": "Default Office",
-      "author": "fedevgonzalez",
-      "description": "The flagship three-wing office: open work area, meeting room, break room, and corridor",
-      "tags": [
-        "starter",
-        "default",
-        "team"
-      ],
-      "cols": 20,
-      "rows": 18,
-      "furnitureCount": 51,
-      "screenshot": "layouts/default-office/preview.png",
-      "layout": "layouts/default-office/layout.json",
-      "createdAt": "2026-03-08"
-    },
-    {
-      "id": "executive-suite",
-      "name": "Executive Suite",
-      "author": "fedevgonzalez",
-      "description": "Private executive suite with commanding desk, meeting room, and executive lounge",
-      "tags": [
-        "executive",
-        "upscale",
-        "solo"
-      ],
-      "cols": 15,
-      "rows": 10,
-      "furnitureCount": 28,
-      "screenshot": "layouts/executive-suite/preview.png",
-      "layout": "layouts/executive-suite/layout.json",
-      "createdAt": "2026-03-08"
-    },
-    {
-      "id": "gaming-den",
-      "name": "Gaming Den",
-      "author": "fedevgonzalez",
-      "description": "High-energy gaming setup with multiple stations, electric blue floors, and a chill zone",
-      "tags": [
-        "fun",
-        "gaming",
-        "creative"
-      ],
-      "cols": 14,
-      "rows": 11,
-      "furnitureCount": 30,
-      "screenshot": "layouts/gaming-den/preview.png",
-      "layout": "layouts/gaming-den/layout.json",
-      "createdAt": "2026-03-08"
-    },
-    {
-      "id": "l-shaped-office",
-      "name": "L-Shaped Office",
-      "author": "fedevgonzalez",
-      "description": "Spacious L-shaped layout with open work area, break room wing, and meeting room stub",
-      "tags": [
-        "large",
-        "l-shape",
-        "lounge"
-      ],
-      "cols": 20,
-      "rows": 14,
-      "furnitureCount": 38,
-      "screenshot": "layouts/l-shaped-office/preview.png",
-      "layout": "layouts/l-shaped-office/layout.json",
-      "createdAt": "2026-03-08"
-    },
-    {
-      "id": "library-study",
-      "name": "Library Study",
-      "author": "fedevgonzalez",
-      "description": "Research library with perimeter bookshelves, quiet reading pod, and coffee break corner",
-      "tags": [
-        "quiet",
-        "books",
-        "focus"
-      ],
-      "cols": 16,
-      "rows": 11,
-      "furnitureCount": 33,
-      "screenshot": "layouts/library-study/preview.png",
-      "layout": "layouts/library-study/layout.json",
-      "createdAt": "2026-03-08"
-    },
-    {
-      "id": "open-plan",
-      "name": "Open Plan",
-      "author": "fedevgonzalez",
-      "description": "Spacious 4-zone office: focus room, open work floor, meeting room, and large break area",
-      "tags": [
-        "team",
-        "large",
-        "meeting"
-      ],
-      "cols": 25,
-      "rows": 15,
-      "furnitureCount": 65,
-      "screenshot": "layouts/open-plan/preview.png",
-      "layout": "layouts/open-plan/layout.json",
-      "createdAt": "2026-03-08"
-    },
-    {
-      "id": "small-studio",
-      "name": "Small Studio",
-      "author": "fedevgonzalez",
-      "description": "Compact indie studio with face-to-face desks, bookshelves, and a cozy break nook",
-      "tags": [
-        "compact",
-        "starter",
-        "solo"
-      ],
-      "cols": 12,
-      "rows": 10,
-      "furnitureCount": 18,
-      "screenshot": "layouts/small-studio/preview.png",
-      "layout": "layouts/small-studio/layout.json",
-      "createdAt": "2026-03-08"
-    },
-    {
-      "id": "tech-startup",
-      "name": "Tech Startup",
-      "author": "fedevgonzalez",
-      "description": "Vibrant tech startup with engineering pod, deep focus zone, and communal break kitchen",
-      "tags": [
-        "startup",
-        "modern",
-        "team"
-      ],
-      "cols": 18,
-      "rows": 12,
-      "furnitureCount": 45,
-      "screenshot": "layouts/tech-startup/preview.png",
-      "layout": "layouts/tech-startup/layout.json",
-      "createdAt": "2026-03-08"
-    }
-  ]
-}
+[
+  {
+    "slug": "default-office",
+    "name": "Default Office",
+    "author": "fedevgonzalez",
+    "description": "The flagship three-wing office: open work area, meeting room, break room, and corridor",
+    "tags": [
+      "starter",
+      "default",
+      "team"
+    ],
+    "createdAt": "2026-03-08"
+  },
+  {
+    "slug": "command-center",
+    "name": "Command Center",
+    "author": "fedevgonzalez",
+    "description": "Mission control layout with monitoring stations, tactical briefing pod, and break alcove",
+    "tags": [
+      "large",
+      "ops",
+      "monitoring"
+    ],
+    "createdAt": "2026-03-08"
+  },
+  {
+    "slug": "cozy-cabin",
+    "name": "Cozy Cabin",
+    "author": "fedevgonzalez",
+    "description": "Warm and intimate workspace with rustic pine floors, bookshelves, and a cozy break nook",
+    "tags": [
+      "cozy",
+      "small",
+      "plants"
+    ],
+    "createdAt": "2026-03-08"
+  },
+  {
+    "slug": "executive-suite",
+    "name": "Executive Suite",
+    "author": "fedevgonzalez",
+    "description": "Private executive suite with commanding desk, meeting room, and executive lounge",
+    "tags": [
+      "executive",
+      "upscale",
+      "solo"
+    ],
+    "createdAt": "2026-03-08"
+  },
+  {
+    "slug": "gaming-den",
+    "name": "Gaming Den",
+    "author": "fedevgonzalez",
+    "description": "High-energy gaming setup with multiple stations, electric blue floors, and a chill zone",
+    "tags": [
+      "fun",
+      "gaming",
+      "creative"
+    ],
+    "createdAt": "2026-03-08"
+  },
+  {
+    "slug": "l-shaped-office",
+    "name": "L-Shaped Office",
+    "author": "fedevgonzalez",
+    "description": "Spacious L-shaped layout with open work area, break room wing, and meeting room stub",
+    "tags": [
+      "large",
+      "l-shape",
+      "lounge"
+    ],
+    "createdAt": "2026-03-08"
+  },
+  {
+    "slug": "library-study",
+    "name": "Library Study",
+    "author": "fedevgonzalez",
+    "description": "Research library with perimeter bookshelves, quiet reading pod, and coffee break corner",
+    "tags": [
+      "quiet",
+      "books",
+      "focus"
+    ],
+    "createdAt": "2026-03-08"
+  },
+  {
+    "slug": "open-plan",
+    "name": "Open Plan",
+    "author": "fedevgonzalez",
+    "description": "Spacious 4-zone office: focus room, open work floor, meeting room, and large break area",
+    "tags": [
+      "team",
+      "large",
+      "meeting"
+    ],
+    "createdAt": "2026-03-08"
+  },
+  {
+    "slug": "small-studio",
+    "name": "Small Studio",
+    "author": "fedevgonzalez",
+    "description": "Compact indie studio with face-to-face desks, bookshelves, and a cozy break nook",
+    "tags": [
+      "compact",
+      "starter",
+      "solo"
+    ],
+    "createdAt": "2026-03-08"
+  },
+  {
+    "slug": "tech-startup",
+    "name": "Tech Startup",
+    "author": "fedevgonzalez",
+    "description": "Vibrant tech startup with engineering pod, deep focus zone, and communal break kitchen",
+    "tags": [
+      "startup",
+      "modern",
+      "team"
+    ],
+    "createdAt": "2026-03-08"
+  }
+]
