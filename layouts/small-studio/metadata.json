@@ -1,7 +1,11 @@
 {
   "name": "Small Studio",
   "author": "fedevgonzalez",
-  "description": "A compact workspace for solo developers or small teams with 1-2 agents",
-  "tags": ["compact", "starter", "solo"],
+  "description": "Compact indie studio with face-to-face desks, bookshelves, and a cozy break nook",
+  "tags": [
+    "compact",
+    "starter",
+    "solo"
+  ],
   "createdAt": "2026-03-08"
 }

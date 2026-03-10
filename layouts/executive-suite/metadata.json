@@ -1,7 +1,11 @@
 {
   "name": "Executive Suite",
   "author": "fedevgonzalez",
-  "description": "Private executive suite with a commanding desk, meeting area, and tasteful decor",
-  "tags": ["executive", "upscale", "solo"],
-  "createdAt": "2026-03-09"
+  "description": "Private executive suite with commanding desk, meeting room, and executive lounge",
+  "tags": [
+    "executive",
+    "upscale",
+    "solo"
+  ],
+  "createdAt": "2026-03-08"
 }

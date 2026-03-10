@@ -1,7 +1,11 @@
 {
-  "name": "Open Plan Office",
+  "name": "Open Plan",
   "author": "fedevgonzalez",
-  "description": "A spacious open-plan office with 6 workstations, a meeting area, and decorations for larger teams",
-  "tags": ["team", "large", "meeting"],
+  "description": "Spacious 4-zone office: focus room, open work floor, meeting room, and large break area",
+  "tags": [
+    "team",
+    "large",
+    "meeting"
+  ],
   "createdAt": "2026-03-08"
 }

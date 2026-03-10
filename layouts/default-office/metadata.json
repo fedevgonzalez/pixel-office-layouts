@@ -1,7 +1,11 @@
 {
   "name": "Default Office",
   "author": "fedevgonzalez",
-  "description": "The default Pixel Office starter layout",
-  "tags": ["starter", "default"],
+  "description": "The flagship three-wing office: open work area, meeting room, break room, and corridor",
+  "tags": [
+    "starter",
+    "default",
+    "team"
+  ],
   "createdAt": "2026-03-08"
 }
