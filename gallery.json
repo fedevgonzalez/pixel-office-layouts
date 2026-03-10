@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-03-10T19:19:11.535Z",
+  "updatedAt": "2026-03-10T19:30:26.058Z",
   "layouts": [
     {
       "id": "command-center",
@@ -14,7 +14,7 @@
       ],
       "cols": 20,
       "rows": 13,
-      "furnitureCount": 43,
+      "furnitureCount": 44,
       "screenshot": "layouts/command-center/preview.png",
       "layout": "layouts/command-center/layout.json",
       "createdAt": "2026-03-08"
@@ -31,7 +31,7 @@
       ],
       "cols": 14,
       "rows": 10,
-      "furnitureCount": 19,
+      "furnitureCount": 20,
       "screenshot": "layouts/cozy-cabin/preview.png",
       "layout": "layouts/cozy-cabin/layout.json",
       "createdAt": "2026-03-08"
@@ -48,7 +48,7 @@
       ],
       "cols": 20,
       "rows": 18,
-      "furnitureCount": 50,
+      "furnitureCount": 51,
       "screenshot": "layouts/default-office/preview.png",
       "layout": "layouts/default-office/layout.json",
       "createdAt": "2026-03-08"
@@ -65,7 +65,7 @@
       ],
       "cols": 15,
       "rows": 10,
-      "furnitureCount": 27,
+      "furnitureCount": 28,
       "screenshot": "layouts/executive-suite/preview.png",
       "layout": "layouts/executive-suite/layout.json",
       "createdAt": "2026-03-08"
@@ -82,7 +82,7 @@
       ],
       "cols": 14,
       "rows": 11,
-      "furnitureCount": 29,
+      "furnitureCount": 30,
       "screenshot": "layouts/gaming-den/preview.png",
       "layout": "layouts/gaming-den/layout.json",
       "createdAt": "2026-03-08"
@@ -99,7 +99,7 @@
       ],
       "cols": 20,
       "rows": 14,
-      "furnitureCount": 37,
+      "furnitureCount": 38,
       "screenshot": "layouts/l-shaped-office/preview.png",
       "layout": "layouts/l-shaped-office/layout.json",
       "createdAt": "2026-03-08"
@@ -116,7 +116,7 @@
       ],
       "cols": 16,
       "rows": 11,
-      "furnitureCount": 32,
+      "furnitureCount": 33,
       "screenshot": "layouts/library-study/preview.png",
       "layout": "layouts/library-study/layout.json",
       "createdAt": "2026-03-08"
@@ -133,7 +133,7 @@
       ],
       "cols": 25,
       "rows": 15,
-      "furnitureCount": 64,
+      "furnitureCount": 65,
       "screenshot": "layouts/open-plan/preview.png",
       "layout": "layouts/open-plan/layout.json",
       "createdAt": "2026-03-08"
@@ -150,7 +150,7 @@
       ],
       "cols": 12,
       "rows": 10,
-      "furnitureCount": 17,
+      "furnitureCount": 18,
       "screenshot": "layouts/small-studio/preview.png",
       "layout": "layouts/small-studio/layout.json",
       "createdAt": "2026-03-08"
@@ -167,7 +167,7 @@
       ],
       "cols": 18,
       "rows": 12,
-      "furnitureCount": 46,
+      "furnitureCount": 47,
       "screenshot": "layouts/tech-startup/preview.png",
       "layout": "layouts/tech-startup/layout.json",
       "createdAt": "2026-03-08"

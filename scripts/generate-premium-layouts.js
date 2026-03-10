@@ -111,6 +111,8 @@ function makeDefaultOffice() {
     // Corridor plants
     furn('plant', 4, 16),
     furn('plant', 15, 16),
+    // Exterior door (bottom wall, corridor)
+    furn('door', 10, 16),
   ]
 
   const colorMap = {
@@ -188,6 +190,8 @@ function makeCommandCenter() {
     furn('break_couch', 14, 10),
     furn('plant', 14, 7),
     furn('plant', 16, 11),
+    // Exterior door (bottom wall)
+    furn('door', 6, 11),
   ]
 
   const colorMap = {
@@ -242,6 +246,8 @@ function makeCozyCabin() {
     furn('cooler', 12, 5),
     furn('plant', 10, 7),
     furn('plant', 12, 7),
+    // Exterior door (bottom wall)
+    furn('door', 4, 8),
   ]
 
   const colorMap = {
@@ -313,6 +319,8 @@ function makeExecutiveSuite() {
     furn('cooler', 13, 8),
     furn('plant', 8, 8),
     furn('plant', 11, 8),
+    // Exterior door (bottom wall)
+    furn('door', 3, 8),
   ]
 
   const colorMap = {
@@ -374,6 +382,8 @@ function makeGamingDen() {
     furn('cooler', 12, 9),
     furn('plant', 1, 9),
     furn('plant', 9, 9),
+    // Exterior door (bottom wall)
+    furn('door', 6, 9),
   ]
 
   const colorMap = {
@@ -450,6 +460,8 @@ function makeLShapedOffice() {
     furn('chair', 6, 12),
     furn('plant', 9, 12),
     furn('plant', 1, 12),
+    // Exterior door (bottom wall of meeting stub)
+    furn('door', 5, 12),
   ]
 
   const colorMap = {
@@ -529,6 +541,8 @@ function makeLibraryStudy() {
     furn('cooler', 14, 9),
     furn('break_couch', 11, 7),
     furn('plant', 11, 9),
+    // Exterior door (bottom wall)
+    furn('door', 5, 9),
   ]
 
   const colorMap = {
@@ -623,6 +637,8 @@ function makeOpenPlan() {
     furn('plant', 23, 13),
     furn('plant', 16, 13),
     furn('plant', 21, 13),
+    // Exterior door (bottom wall)
+    furn('door', 12, 13),
   ]
 
   const colorMap = {
@@ -680,6 +696,8 @@ function makeSmallStudio() {
     furn('break_couch', 8, 5),
     furn('plant', 8, 1),
     furn('plant', 8, 8),
+    // Exterior door (bottom wall)
+    furn('door', 3, 8),
   ]
 
   const colorMap = {
@@ -760,6 +778,8 @@ function makeTechStartup() {
     furn('plant', 16, 8),
     furn('plant', 12, 10),
     furn('plant', 14, 10),
+    // Exterior door (bottom wall)
+    furn('door', 3, 10),
   ]
 
   const colorMap = {
