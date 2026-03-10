@@ -1412,22 +1412,6 @@
     null,
     null
   ],
-  "pets": [
-    {
-      "uid": "pet-ts-1",
-      "species": "cat",
-      "name": "Pixel",
-      "col": 9,
-      "row": 3,
-      "personality": "playful",
-      "petColors": {
-        "body": "#d08030",
-        "eyes": "#40c040",
-        "pattern": "striped",
-        "patternColor": "#e8e0d8"
-      }
-    }
-  ],
   "background": {
     "theme": "suburban"
   }

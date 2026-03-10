@@ -906,35 +906,6 @@
     null,
     null
   ],
-  "pets": [
-    {
-      "uid": "pet-cab-1",
-      "species": "cat",
-      "name": "Luna",
-      "col": 4,
-      "row": 6,
-      "personality": "lazy",
-      "petColors": {
-        "body": "#e8e0d8",
-        "eyes": "#4088e0",
-        "nose": "#f0a0b0",
-        "pattern": "solid"
-      }
-    },
-    {
-      "uid": "pet-cab-2",
-      "species": "dog",
-      "name": "Coco",
-      "col": 8,
-      "row": 5,
-      "personality": "chill",
-      "petColors": {
-        "body": "#503020",
-        "eyes": "#201008",
-        "nose": "#302010"
-      }
-    }
-  ],
   "background": {
     "theme": "suburban"
   }

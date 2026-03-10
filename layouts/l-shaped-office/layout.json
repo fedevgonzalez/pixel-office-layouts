@@ -1484,21 +1484,6 @@
     null,
     null
   ],
-  "pets": [
-    {
-      "uid": "pet-ls-1",
-      "species": "dog",
-      "name": "Buddy",
-      "col": 4,
-      "row": 6,
-      "personality": "energetic",
-      "petColors": {
-        "body": "#c09060",
-        "eyes": "#201008",
-        "nose": "#302010"
-      }
-    }
-  ],
   "background": {
     "theme": "suburban"
   }

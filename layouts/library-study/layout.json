@@ -1176,22 +1176,6 @@
     null,
     null
   ],
-  "pets": [
-    {
-      "uid": "pet-lib-1",
-      "species": "cat",
-      "name": "Mochi",
-      "col": 7,
-      "row": 8,
-      "personality": "lazy",
-      "petColors": {
-        "body": "#2a2a2a",
-        "eyes": "#d0a020",
-        "pattern": "tuxedo",
-        "patternColor": "#e8e0d8"
-      }
-    }
-  ],
   "background": {
     "theme": "suburban"
   }
