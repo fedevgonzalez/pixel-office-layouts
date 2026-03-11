@@ -40,17 +40,12 @@ jobs:
                   per_page: 100,
                 });
 
-                let up = 0, down = 0;
-                for (const r of reactions.data) {
-                  if (r.content === '+1') up++;
-                  if (r.content === '-1') down++;
-                }
-                const net = up - down;
+                const likes = reactions.data.filter(r => r.content === '+1').length;
 
-                if (metadata.votes !== net) {
-                  metadata.votes = net;
+                if (metadata.votes !== likes) {
+                  metadata.votes = likes;
                   fs.writeFileSync(metaPath, JSON.stringify(metadata, null, 2) + '\n');
-                  console.log(`${entry.name}: ${net} votes (${up} up, ${down} down)`);
+                  console.log(`${entry.name}: ${likes} likes`);
                   changed = true;
                 }
               } catch (e) {
