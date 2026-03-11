@@ -4,18 +4,29 @@ Thanks for sharing your Pixel Office layout with the community!
 
 ## Submission Guide
 
-### 1. Export your layout
+### Easy way: Share from the app
+
+1. In Pixel Office, click **Community** > **Share Your Layout**
+2. Fill in the name, description, and tags
+3. Click Share — this opens a pre-filled GitHub Issue
+4. Submit the issue — a CI bot will automatically create a PR with your layout and a preview screenshot
+
+That's it! A maintainer will review and merge your layout. Once merged, it appears in the community gallery and users can vote for it.
+
+### Manual way: Open a PR
+
+#### 1. Export your layout
 
 In Pixel Office, open **Settings** > **Export Layout** and save the `.json` file.
 
-### 2. Fork and clone this repo
+#### 2. Fork and clone this repo
 
 ```sh
 git clone https://github.com/<your-username>/pixel-office-layouts.git
 cd pixel-office-layouts
 ```
 
-### 3. Create your layout directory
+#### 3. Create your layout directory
 
 Each layout lives in its own subdirectory under `layouts/`:
 
@@ -29,7 +40,7 @@ layouts/
 
 Use lowercase kebab-case for the directory name. Keep it short and descriptive (e.g. `cozy-startup`, `big-open-plan`, `cyberpunk-hq`).
 
-### 4. Create metadata.json
+#### 4. Create metadata.json
 
 ```json
 {
@@ -50,12 +61,13 @@ Use lowercase kebab-case for the directory name. Keep it short and descriptive (
 | `description` | Yes | Brief description (1-2 sentences) |
 | `tags` | Yes | Array of lowercase tags for categorization |
 | `createdAt` | Yes | Date in `YYYY-MM-DD` format |
+| `issueNumber` | No | Assigned automatically by CI when your layout is processed |
 
-### 5. Add a preview screenshot
+#### 5. Add a preview screenshot
 
 Take a screenshot of your layout in Pixel Office and save it as `preview.png` in your layout directory. This helps others see what your layout looks like before importing it.
 
-### 6. Test locally
+#### 6. Test locally
 
 Run the gallery generator to make sure your entry is valid:
 
@@ -65,7 +77,7 @@ node scripts/generate-gallery.js
 
 Check that `gallery.json` includes your layout with the correct information.
 
-### 7. Open a Pull Request
+#### 7. Open a Pull Request
 
 Push your branch and open a PR. The gallery will be automatically regenerated when your PR is merged.
 
@@ -86,6 +98,10 @@ layouts/
 - Keep descriptions concise
 - Use relevant tags to help others find your layout
 - Preview screenshots should show the full layout
+
+## Voting
+
+Once your layout is merged, users can star it directly in the Pixel Office app. Stars are stored as +1 reactions on the layout's GitHub Issue, and vote counts are synced automatically every 6 hours. No action needed from you -- it just works.
 
 ## License
 

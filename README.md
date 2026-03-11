@@ -1,8 +1,12 @@
 # Pixel Office Layouts
 
-Community gallery of layouts for [Pixel Office](https://github.com/fedevgonzalez/pixel-office).
+Community gallery of layouts for [Pixel Office](https://github.com/fedevgonzalez/pixel-office). Browse, star, and import layouts directly from the app.
 
 ## How to use a layout
+
+The easiest way is through the app: click **Community** in Pixel Office to browse and import layouts with one click.
+
+You can also do it manually:
 
 1. Browse the [`layouts/`](layouts/) directory and pick one you like
 2. Download the `layout.json` file from the layout's subdirectory
@@ -33,13 +37,22 @@ See [CONTRIBUTING.md](CONTRIBUTING.md) for the full submission guide.
 4. Run `node scripts/generate-gallery.js` to verify
 5. Open a Pull Request
 
+## Voting
+
+Each layout has a corresponding GitHub Issue (labeled `layout-submission`). You can vote for layouts you like:
+
+- **In the app:** Click the star icon on any layout in the Community gallery — this adds a +1 reaction to the layout's GitHub Issue.
+- **On GitHub:** Find the layout's issue and add a :+1: reaction directly.
+
+Vote counts are synced automatically every 6 hours and reflected in `gallery.json`.
+
 ## Gallery
 
-The [`gallery.json`](gallery.json) file at the repo root contains an auto-generated index of all layouts with metadata and layout stats. It is updated automatically when layouts are added or changed on the `main` branch.
+See [`gallery.json`](gallery.json) for the full machine-readable index of all layouts with metadata, stats, and vote counts. It is regenerated automatically when layouts are added or votes change. Browse layouts directly in the Pixel Office app for the best experience.
 
-| Name | Author | Description | Size | Furniture |
-|------|--------|-------------|------|-----------|
-| Default Office | fedevgonzalez | The default Pixel Office starter layout | 21x21 | 56 |
+## Contributing
+
+This repo is public and welcomes contributions! See [CONTRIBUTING.md](CONTRIBUTING.md) for the full guide, or share your layout directly from the Pixel Office app.
 
 ## License
 
