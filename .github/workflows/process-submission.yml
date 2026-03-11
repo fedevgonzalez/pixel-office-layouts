@@ -120,6 +120,7 @@ jobs:
                 description,
                 tags,
                 createdAt: new Date().toISOString().slice(0, 10),
+                issueNumber: issue.number,
               }, null, 2) + '\n'
             );
 

@@ -29,7 +29,7 @@ function main() {
     const previewPath = path.join(dirPath, "preview.png");
     const hasPreview = fs.existsSync(previewPath);
 
-    layouts.push({
+    const entry_data = {
       id: dirName,
       name: metadata.name,
       author: metadata.author,
@@ -41,7 +41,10 @@ function main() {
       screenshot: hasPreview ? `layouts/${dirName}/preview.png` : null,
       layout: `layouts/${dirName}/layout.json`,
       createdAt: metadata.createdAt || null,
-    });
+    };
+    if (metadata.issueNumber) entry_data.issueNumber = metadata.issueNumber;
+    if (typeof metadata.votes === "number") entry_data.votes = metadata.votes;
+    layouts.push(entry_data);
   }
 
   layouts.sort((a, b) => a.id.localeCompare(b.id));

@@ -1,0 +1,75 @@
+name: Update Vote Counts
+
+on:
+  schedule:
+    - cron: '0 */6 * * *'  # Every 6 hours
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Fetch reaction counts and update metadata
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+            const path = require('path');
+            const layoutsDir = 'layouts';
+            const entries = fs.readdirSync(layoutsDir, { withFileTypes: true });
+            let changed = false;
+
+            for (const entry of entries) {
+              if (!entry.isDirectory()) continue;
+              const metaPath = path.join(layoutsDir, entry.name, 'metadata.json');
+              if (!fs.existsSync(metaPath)) continue;
+
+              const metadata = JSON.parse(fs.readFileSync(metaPath, 'utf8'));
+              if (!metadata.issueNumber) continue;
+
+              try {
+                const reactions = await github.rest.reactions.listForIssue({
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+                  issue_number: metadata.issueNumber,
+                  per_page: 100,
+                });
+
+                let up = 0, down = 0;
+                for (const r of reactions.data) {
+                  if (r.content === '+1') up++;
+                  if (r.content === '-1') down++;
+                }
+                const net = up - down;
+
+                if (metadata.votes !== net) {
+                  metadata.votes = net;
+                  fs.writeFileSync(metaPath, JSON.stringify(metadata, null, 2) + '\n');
+                  console.log(`${entry.name}: ${net} votes (${up} up, ${down} down)`);
+                  changed = true;
+                }
+              } catch (e) {
+                console.warn(`Failed to fetch reactions for issue #${metadata.issueNumber}: ${e.message}`);
+              }
+            }
+
+            if (!changed) {
+              console.log('No vote changes detected');
+            }
+
+      - name: Regenerate gallery
+        if: success()
+        run: node scripts/generate-gallery.js
+
+      - name: Commit changes
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git diff --staged --quiet || git commit -m "chore: update vote counts"
+          git push
