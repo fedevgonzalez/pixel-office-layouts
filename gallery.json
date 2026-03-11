@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-03-11T12:20:21.750Z",
+  "updatedAt": "2026-03-11T18:23:04.067Z",
   "layouts": [
     {
       "id": "command-center",
@@ -18,7 +18,8 @@
       "screenshot": "layouts/command-center/preview.png",
       "layout": "layouts/command-center/layout.json",
       "createdAt": "2026-03-08",
-      "issueNumber": 18
+      "issueNumber": 18,
+      "votes": 1
     },
     {
       "id": "cozy-cabin",
@@ -36,7 +37,8 @@
       "screenshot": "layouts/cozy-cabin/preview.png",
       "layout": "layouts/cozy-cabin/layout.json",
       "createdAt": "2026-03-08",
-      "issueNumber": 19
+      "issueNumber": 19,
+      "votes": 0
     },
     {
       "id": "default-office",
@@ -54,7 +56,8 @@
       "screenshot": "layouts/default-office/preview.png",
       "layout": "layouts/default-office/layout.json",
       "createdAt": "2026-03-08",
-      "issueNumber": 20
+      "issueNumber": 20,
+      "votes": 0
     },
     {
       "id": "executive-suite",
@@ -72,7 +75,8 @@
       "screenshot": "layouts/executive-suite/preview.png",
       "layout": "layouts/executive-suite/layout.json",
       "createdAt": "2026-03-08",
-      "issueNumber": 21
+      "issueNumber": 21,
+      "votes": 0
     },
     {
       "id": "gaming-den",
@@ -90,7 +94,8 @@
       "screenshot": "layouts/gaming-den/preview.png",
       "layout": "layouts/gaming-den/layout.json",
       "createdAt": "2026-03-08",
-      "issueNumber": 22
+      "issueNumber": 22,
+      "votes": 0
     },
     {
       "id": "l-shaped-office",
@@ -108,7 +113,8 @@
       "screenshot": "layouts/l-shaped-office/preview.png",
       "layout": "layouts/l-shaped-office/layout.json",
       "createdAt": "2026-03-08",
-      "issueNumber": 23
+      "issueNumber": 23,
+      "votes": 0
     },
     {
       "id": "library-study",
@@ -126,7 +132,8 @@
       "screenshot": "layouts/library-study/preview.png",
       "layout": "layouts/library-study/layout.json",
       "createdAt": "2026-03-08",
-      "issueNumber": 24
+      "issueNumber": 24,
+      "votes": 0
     },
     {
       "id": "open-plan",
@@ -144,7 +151,8 @@
       "screenshot": "layouts/open-plan/preview.png",
       "layout": "layouts/open-plan/layout.json",
       "createdAt": "2026-03-08",
-      "issueNumber": 25
+      "issueNumber": 25,
+      "votes": 0
     },
     {
       "id": "small-studio",
@@ -162,7 +170,8 @@
       "screenshot": "layouts/small-studio/preview.png",
       "layout": "layouts/small-studio/layout.json",
       "createdAt": "2026-03-08",
-      "issueNumber": 26
+      "issueNumber": 26,
+      "votes": 0
     },
     {
       "id": "tech-startup",
@@ -180,7 +189,8 @@
       "screenshot": "layouts/tech-startup/preview.png",
       "layout": "layouts/tech-startup/layout.json",
       "createdAt": "2026-03-08",
-      "issueNumber": 27
+      "issueNumber": 27,
+      "votes": 0
     }
   ]
 }
