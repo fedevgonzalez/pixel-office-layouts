@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-03-10T22:29:15.638Z",
+  "updatedAt": "2026-03-11T15:19:45.114Z",
   "layouts": [
     {
       "id": "command-center",
@@ -17,7 +17,8 @@
       "furnitureCount": 44,
       "screenshot": "layouts/command-center/preview.png",
       "layout": "layouts/command-center/layout.json",
-      "createdAt": "2026-03-08"
+      "createdAt": "2026-03-08",
+      "issueNumber": 18
     },
     {
       "id": "cozy-cabin",
@@ -34,7 +35,8 @@
       "furnitureCount": 20,
       "screenshot": "layouts/cozy-cabin/preview.png",
       "layout": "layouts/cozy-cabin/layout.json",
-      "createdAt": "2026-03-08"
+      "createdAt": "2026-03-08",
+      "issueNumber": 19
     },
     {
       "id": "default-office",
@@ -51,7 +53,8 @@
       "furnitureCount": 52,
       "screenshot": "layouts/default-office/preview.png",
       "layout": "layouts/default-office/layout.json",
-      "createdAt": "2026-03-08"
+      "createdAt": "2026-03-08",
+      "issueNumber": 20
     },
     {
       "id": "executive-suite",
@@ -68,7 +71,8 @@
       "furnitureCount": 26,
       "screenshot": "layouts/executive-suite/preview.png",
       "layout": "layouts/executive-suite/layout.json",
-      "createdAt": "2026-03-08"
+      "createdAt": "2026-03-08",
+      "issueNumber": 21
     },
     {
       "id": "gaming-den",
@@ -85,7 +89,8 @@
       "furnitureCount": 29,
       "screenshot": "layouts/gaming-den/preview.png",
       "layout": "layouts/gaming-den/layout.json",
-      "createdAt": "2026-03-08"
+      "createdAt": "2026-03-08",
+      "issueNumber": 22
     },
     {
       "id": "l-shaped-office",
@@ -102,7 +107,8 @@
       "furnitureCount": 33,
       "screenshot": "layouts/l-shaped-office/preview.png",
       "layout": "layouts/l-shaped-office/layout.json",
-      "createdAt": "2026-03-08"
+      "createdAt": "2026-03-08",
+      "issueNumber": 23
     },
     {
       "id": "library-study",
@@ -119,7 +125,8 @@
       "furnitureCount": 33,
       "screenshot": "layouts/library-study/preview.png",
       "layout": "layouts/library-study/layout.json",
-      "createdAt": "2026-03-08"
+      "createdAt": "2026-03-08",
+      "issueNumber": 24
     },
     {
       "id": "open-plan",
@@ -136,7 +143,8 @@
       "furnitureCount": 64,
       "screenshot": "layouts/open-plan/preview.png",
       "layout": "layouts/open-plan/layout.json",
-      "createdAt": "2026-03-08"
+      "createdAt": "2026-03-08",
+      "issueNumber": 25
     },
     {
       "id": "small-studio",
@@ -153,7 +161,8 @@
       "furnitureCount": 18,
       "screenshot": "layouts/small-studio/preview.png",
       "layout": "layouts/small-studio/layout.json",
-      "createdAt": "2026-03-08"
+      "createdAt": "2026-03-08",
+      "issueNumber": 26
     },
     {
       "id": "tech-startup",
@@ -170,7 +179,8 @@
       "furnitureCount": 45,
       "screenshot": "layouts/tech-startup/preview.png",
       "layout": "layouts/tech-startup/layout.json",
-      "createdAt": "2026-03-08"
+      "createdAt": "2026-03-08",
+      "issueNumber": 27
     }
   ]
 }
